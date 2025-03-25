@@ -1,6 +1,6 @@
 {
 	"manifest_version": 3,
-	"name": "Run script automatically",
+	"name": "Prettier Section Tally",
 	"description": "Runs a script on Rowan Section Tally automatically when the page loads.",
 	"version": "1.0.1",
 	"icons": {
@@ -10,7 +10,7 @@
 	"content_scripts": [
 	  {
 		"js": ["scripts/sectionTallyPrettier.js"],
-		"matches": ["https://banner.rowan.edu/reports/reports.pl"]
+		"matches": ["https://banner.rowan.edu/reports/*"]
 	  }
 	]
   }

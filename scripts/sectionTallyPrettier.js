@@ -8,14 +8,14 @@ function deleteColumns() {
 
     // The column titles we want to delete
     const columnsToDelete = [
-        'Part of Term', 
-        'Campus', 
-        'Max', 
-        'MaxResv', 
-        'LeftResv', 
-        'WaitCap', 
-        'WaitCount', 
-        'WaitAvail', 
+        'Part of Term',
+        'Campus',
+        'Max',
+        'MaxResv',
+        'LeftResv',
+        'WaitCap',
+        'WaitCount',
+        'WaitAvail',
         'Room Cap'
     ];
 
@@ -32,7 +32,7 @@ function deleteColumns() {
     Array.from(table.rows).forEach(row => {
         // Skip empty rows or rows with only empty cells
         if (row.cells.length === 0 || (row.cells.length === 1 && row.cells[0].getAttribute('colspan') === '0')) {
-            return; // Skip this row
+            return;
         }
 
         // Delete the columns by their index
