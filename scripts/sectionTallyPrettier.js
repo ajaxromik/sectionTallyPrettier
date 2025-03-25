@@ -1,9 +1,64 @@
+function addSemesterInput() {
+	// Remove existing change term button
+	document.querySelector('div form').remove();
+
+	// Gets year 6 months from now
+	let date = new Date();
+	date.setMonth(date.getMonth()+6);
+	let year = date.getFullYear();
+	console.log(year);
+
+	// Create season selector
+	const seasonSelector = document.createElement('select');
+	seasonSelector.setAttribute('id', 'seasonSelector');
+	seasonSelector.innerHTML = `
+		<option value="10">Winter</option>
+		<option value="20">Spring</option>
+		<option value="30">Summer</option>
+		<option selected value="40">Fall</option>
+	`;
+
+	// Create the year input
+	const yearInput = document.createElement('input');
+	yearInput.setAttribute('type', 'text');
+	yearInput.setAttribute('id', 'yearInput');
+	yearInput.setAttribute('default', year);
+	yearInput.setAttribute('placeholder', 'Enter year');
+
+	// Create term change button
+	const changeButton = document.createElement('button');
+	changeButton.setAttribute('id', 'changeButton');
+	changeButton.setAttribute('onclick', 'updateSemester()');
+	changeButton.innerText = 'Change Semester';
+
+	// Create semester input div
+	const semesterInputDiv = document.createElement('div');
+	semesterInputDiv.setAttribute('id', 'semesterInputDiv');
+	semesterInputDiv.setAttribute('style', 'margin-bottom: 10px;');
+	semesterInputDiv.append(seasonSelector, yearInput, changeButton);
+
+	// Get form table
+	const tableBody = document.querySelectorAll('form.print')[0];
+	tableBody.prepend(semesterInputDiv);
+}
+
+function updateSemester() {
+	// Get the season and year
+	const season = document.getElementById('seasonSelector').value;
+	const year = document.getElementById('yearInput').value;
+
+	// Submit the new form
+	const termInput = document.querySelectorAll('form.print input[name="term"]')[0];
+	termInput.value = year + season;
+
+	document.querySelectorAll('form.print')[0].submit();
+}
+
 function deleteColumns() {
     // Get the second table on the page
     const table = document.querySelectorAll('table')[1];
-    // Index 1 refers to the second table
 
-    // Get the header row (the first row in the <thead>)
+    // Get the header row
     const headerRow = table.querySelector('thead tr');
 
     // The column titles we want to delete
@@ -42,4 +97,5 @@ function deleteColumns() {
     });
 }
 
+addSemesterInput();
 deleteColumns();
