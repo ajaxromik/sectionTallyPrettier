@@ -9,7 +9,14 @@
 	},
 	"content_scripts": [
 	  {
-		"js": ["scripts/sectionTallyPrettier.js"],
+		"js": [
+			"scripts/jquery-3.7.1.min.js",
+			"scripts/select2.min.js",
+			"scripts/sectionTallyPrettier.js"
+		],
+		"css": [
+			"css/select2.min.css"
+		],
 		"matches": ["https://banner.rowan.edu/reports/*"]
 	  }
 	]
