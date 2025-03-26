@@ -2,12 +2,6 @@ function addSemesterInput() {
 	// Remove existing change term button
 	document.querySelector('div form').remove();
 
-	// Gets year 6 months from now
-	let date = new Date();
-	date.setMonth(date.getMonth()+6);
-	let year = date.getFullYear();
-	console.log(year);
-
 	// Create season selector
 	const seasonSelector = document.createElement('select');
 	seasonSelector.setAttribute('id', 'seasonSelector');
@@ -17,18 +11,23 @@ function addSemesterInput() {
 		<option value="30">Summer</option>
 		<option selected value="40">Fall</option>
 	`;
+	seasonSelector.onchange = updateSemester;
+
+	// Get the current set year
+	let year = document.querySelectorAll('form.print input[name="term"]')[0].value.substring(0, 4);
 
 	// Create the year input
 	const yearInput = document.createElement('input');
 	yearInput.setAttribute('type', 'text');
 	yearInput.setAttribute('id', 'yearInput');
-	yearInput.setAttribute('default', year);
+	yearInput.setAttribute('value', year);
 	yearInput.setAttribute('placeholder', 'Enter year');
+	yearInput.onchange = updateSemester;
 
 	// Create term change button
 	const changeButton = document.createElement('button');
 	changeButton.setAttribute('id', 'changeButton');
-	changeButton.setAttribute('onclick', 'updateSemester()');
+	changeButton.setAttribute('onclick', 'document.querySelector("input[name=Search]").click();');
 	changeButton.innerText = 'Change Semester';
 
 	// Create semester input div
@@ -50,8 +49,6 @@ function updateSemester() {
 	// Submit the new form
 	const termInput = document.querySelectorAll('form.print input[name="term"]')[0];
 	termInput.value = year + season;
-
-	document.querySelectorAll('form.print')[0].submit();
 }
 
 function deleteColumns() {
@@ -97,5 +94,14 @@ function deleteColumns() {
     });
 }
 
-addSemesterInput();
-deleteColumns();
+try {
+	addSemesterInput();
+} catch (e) {
+	console.log('Failed to add semester input:\n', e);
+}
+
+try {
+	deleteColumns();
+} catch (e) {
+	console.log('Failed to delete columns:\n', e);
+}
